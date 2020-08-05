@@ -1,1 +1,1 @@
-web: gunicorn operacaofifa/app:app
+web: gunicorn operacaofifa.app:app
