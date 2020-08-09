@@ -81,13 +81,13 @@ def respond():
                 quantity = row[1]
 
         locale.setlocale(locale.LC_MONETARY, 'en_US.UTF-8')
-        quantity_format = locale.currency(
-            float(quantity), grouping=True, symbol=None)
+        amount_format = locale.currency(
+            float(amount), grouping=True, symbol=None)
 
         message = f'''
 😀 Veja aqui os dados solicitados:\n
-💵 R$ {amount} Foram doados até o momento.
-📉 Ao todo foram {quantity_format} doações.
+💵 R$ {amount_format} Foram doados até o momento.
+📉 Ao todo foram {quantity} doações.
 
 Este bot não tem ligação direta com a Meep, ou o Cruzeiro.\n
 É feito de Cruzeirenses para Cruzeirenses, doe e ajude o Cruzeiro.\n
