@@ -95,6 +95,19 @@ Saiba mais em: https://www.meepdonate.com/live/operacaofifa
         '''
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
+
+    elif text == "/ultima_atualizacao":
+        with engine.connect() as connection:
+            result = connection.execute(
+                "select strftime('%d/%m/%Y %H:%M', date_last_request) last_request from date_last_request")
+            for row in result:
+                last_request = row[0]
+        message = f'''
+        A nossa base de dados foi atulizada pela úlima vez em {last_request}
+        '''
+        bot.sendMessage(chat_id=chat_id, text=message,
+                        reply_to_message_id=msg_id)
+
     else:
         try:
             # clear the message we got from any non alphabets
