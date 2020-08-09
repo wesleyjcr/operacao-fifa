@@ -16,7 +16,6 @@ bot = telegram.Bot(token=TOKEN)
 app = Flask(__name__)
 
 engine = create_engine('sqlite:///storage.db', echo=False)
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 
 def update_data():
@@ -79,12 +78,15 @@ def respond():
                 'select sum(amount) amount, sum(quantity) quantity from donations')
             for row in result:
                 amount = row[0]
-                quantity = locale.currency(float(row[1]), grouping=True)
+                quantity = row[1]
+
+        locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+        quantity_format = locale.currency(float(quantity), grouping=True)
 
         message = f'''
 😀 Veja aqui os dados solicitados:\n
-💵 {amount} foram doados até o momento.
-📉 Ao todo foram {quantity} doações.
+💵 R$ {amount} Foram doados até o momento.
+📉 Ao todo foram {quantity_format} doações.
 
 Este bot não tem ligação direta com a Meep, ou o Cruzeiro.\n
 É feito de Cruzeirenses para Cruzeirenses, doe e ajude o Cruzeiro.\n
