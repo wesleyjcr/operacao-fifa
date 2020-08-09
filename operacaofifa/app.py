@@ -111,6 +111,25 @@ Saiba mais em: https://www.meepdonate.com/live/operacaofifa
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
+    elif text == "/resumo_semanal":
+        with engine.connect() as connection:
+            message = '''
+Este é um resumo das doações dos últimos sete dias:\n
+Data\tValor
+----\t-----'''
+            sum_amount = 0
+            result = connection.execute(
+                """select substr(date,0,11)date, sum(amount) valor_doado from quantities
+                   group by date
+                   order by date DESC
+                   limit 7""")
+            for row in result:
+                message += f'{row[0]}\t{row[1]}'
+                sum_amount += row[1]
+
+        bot.sendMessage(chat_id=chat_id, text=message,
+                        reply_to_message_id=msg_id)
+
     else:
         message = '''
 Você pode interagir com o bot com os seguintes comandos:
