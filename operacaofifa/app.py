@@ -62,6 +62,9 @@ def respond():
 
     text = update.message.text.encode("utf-8").decode()
 
+    if need_to_update():
+        update_data()
+
     if text == "/start":
         bot_welcome = """
         Seja bem vindo ao bot da operação fifa, saiba tudo sobre as doações.
@@ -70,9 +73,6 @@ def respond():
                         reply_to_message_id=msg_id)
 
     elif text == "/status":
-        if need_to_update():
-            update_data()
-
         with engine.connect() as connection:
             result = connection.execute(
                 'select sum(amount) amount, sum(quantity) quantity from donations')
@@ -112,23 +112,15 @@ Saiba mais em: https://www.meepdonate.com/live/operacaofifa
                         reply_to_message_id=msg_id)
 
     else:
-        try:
-            # clear the message we got from any non alphabets
-            text = re.sub(r"\W", "_", text)
-            # create the api link for the avatar based on http://avatars.adorable.io/
-            url = "https://api.adorable.io/avatars/285/{}.png".format(
-                text.strip())
-            # reply with a photo to the name the user sent,
-            # note that you can send photos by url and telegram will fetch it for you
-            bot.sendPhoto(chat_id=chat_id, photo=url,
-                          reply_to_message_id=msg_id)
-        except Exception:
-            # if things went wrong
-            bot.sendMessage(
-                chat_id=chat_id,
-                text="There was a problem in the name you used, please enter different name",
-                reply_to_message_id=msg_id,
-            )
+        message = '''
+Você pode interagir com o bot com os seguintes comandos:
+
+/start - Iniciar o bot
+/status - Veja um panorama geral das doações
+/ultima_atualizacao - Verifique a última vez que a base de dados foi atualizada
+        '''
+        bot.sendMessage(chat_id=chat_id, text=message,
+                        reply_to_message_id=msg_id)
 
     return "ok"
 
