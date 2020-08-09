@@ -79,7 +79,7 @@ def respond():
                 'select sum(amount) amount, sum(quantity) quantity from donations')
             for row in result:
                 amount = row[0]
-                quantity = locale.currency(row[1], grouping=True)
+                quantity = locale.currency(float(row[1]), grouping=True)
 
         message = f'''
 😀 Veja aqui os dados solicitados:\n
