@@ -99,11 +99,14 @@ Saiba mais em: https://www.meepdonate.com/live/operacaofifa
     elif text == "/ultima_atualizacao":
         with engine.connect() as connection:
             result = connection.execute(
-                "select strftime('%d/%m/%Y %H:%M', date_last_request) last_request from date_last_request")
+                "select date_last_request last_request from date_last_request")
             for row in result:
-                last_request = row[0]
+                last_update = datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S.%f')
+
+        time_delta = datetime.now()-last_update
+        minutes_last_update = int(time_delta.total_seconds()/60)
         message = f'''
-        A nossa base de dados foi atulizada pela úlima vez em {last_request}
+        A nossa base de dados foi atulizada pela úlima vez há {minutes_last_update} minutos atrás.
         '''
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
