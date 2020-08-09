@@ -115,18 +115,19 @@ Saiba mais em: https://www.meepdonate.com/live/operacaofifa
         with engine.connect() as connection:
             message = '''
 Este é um resumo das doações dos últimos sete dias:\n
-Data\tValor
-----\t-----'''
+Data        Valor
+'''
             sum_amount = 0
+            locale.setlocale(locale.LC_MONETARY, 'en_US.UTF-8')
             result = connection.execute(
                 """select substr(date,0,11)date, sum(amount) valor_doado from quantities
                    group by date
                    order by date DESC
                    limit 7""")
             for row in result:
-                message += f'{row[0]}\t{row[1]}'
-                sum_amount += row[1]
-
+                message += f'{row[0]}  R$ {locale.currency(float(row[1]), grouping=True, symbol=None)}'
+                sum_amount += float(row[1])
+        message += f'\nO total de doações dos últimos 7 dias foi {locale.currency(sum_amount, grouping=True, symbol=None)}'
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
