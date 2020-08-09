@@ -125,7 +125,8 @@ Data                 Valor
                    order by date DESC
                    limit 7""")
             for row in result:
-                message += f'{row[0]}         R$ {locale.currency(float(row[1]), grouping=True, symbol=None)}\n'
+                date_format = row[0][8:9]+'/'+row[0][5:6]+'/'+row[0][0:3]
+                message += f'{date_format}         R$ {locale.currency(float(row[1]), grouping=True, symbol=None)}\n'
                 sum_amount += float(row[1])
         message += f'\nO total de doações dos últimos 7 dias foi {locale.currency(sum_amount, grouping=True, symbol=None)}'
         bot.sendMessage(chat_id=chat_id, text=message,
