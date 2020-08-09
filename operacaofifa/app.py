@@ -80,8 +80,9 @@ def respond():
                 amount = row[0]
                 quantity = row[1]
 
-        locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-        quantity_format = locale.currency(float(quantity), grouping=True)
+        locale.setlocale(locale.LC_MONETARY, 'en_US.UTF-8')
+        quantity_format = locale.currency(
+            float(quantity), grouping=True, symbol=None)
 
         message = f'''
 😀 Veja aqui os dados solicitados:\n
