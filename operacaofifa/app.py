@@ -83,7 +83,7 @@ def respond():
 
         message = f'''
 😀 Veja aqui os dados solicitados:\n
-💵 R$ {amount} Foram doados até o momento.
+💵 {amount} foram doados até o momento.
 📉 Ao todo foram {quantity} doações.
 
 Este bot não tem ligação direta com a Meep, ou o Cruzeiro.\n
