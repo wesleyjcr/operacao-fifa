@@ -79,7 +79,7 @@ def respond():
                 amount = row[0]
                 quantity = row[1]
 
-        message = '''😀 Veja aqui os dados solicitados:\n
+        message = f'''😀 Veja aqui os dados solicitados:\n
         💵 R$ {amount} Foram doados até o momento.
         📉 Ao todo foram {quantity} doações.
 
