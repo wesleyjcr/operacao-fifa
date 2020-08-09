@@ -22,10 +22,9 @@ run:
 	flask run
 
 publish:
-	echo "publish"
-
-commit:
-	echo "commit"
+		git add .
+		git commit -a --allow-empty-message -m ''
+		git push heroku master
 
 release:
 	echo "cria uma versão/changelog dos n commits desde o último release"
