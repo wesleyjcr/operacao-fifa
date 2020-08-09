@@ -1,11 +1,5 @@
 '''
 Capturar dados do site
-Inserir em um banco de dados 
-    Tabelas
-        Ultima atualização
-        Donations
-        Quantidades
-
     Total doado por dia
     Total doado por mês
     Gráfico com valores

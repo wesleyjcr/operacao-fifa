@@ -125,7 +125,7 @@ Data                 Valor
                    order by date DESC
                    limit 7""")
             for row in result:
-                date_format = row[0][8:9]+'/'+row[0][5:6]+'/'+row[0][0:3]
+                date_format = row[0][8:10]+'/'+row[0][5:7]+'/'+row[0][0:4]
                 message += f'{date_format}         R$ {locale.currency(float(row[1]), grouping=True, symbol=None)}\n'
                 sum_amount += float(row[1])
         message += f'\nO total de doações dos últimos 7 dias foi {locale.currency(sum_amount, grouping=True, symbol=None)}'
