@@ -1,5 +1,6 @@
 import telegram
 import requests
+import locale
 import pandas as pd
 from datetime import datetime
 from flask import Flask, request, jsonify
@@ -15,6 +16,7 @@ bot = telegram.Bot(token=TOKEN)
 app = Flask(__name__)
 
 engine = create_engine('sqlite:///storage.db', echo=False)
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 
 def update_data():
@@ -77,7 +79,7 @@ def respond():
                 'select sum(amount) amount, sum(quantity) quantity from donations')
             for row in result:
                 amount = row[0]
-                quantity = row[1]
+                quantity = locale.currency(row[1], grouping=True)
 
         message = f'''
 😀 Veja aqui os dados solicitados:\n
@@ -119,18 +121,6 @@ def set_webhook():
         return "webhook setup ok"
     else:
         return "webhook setup failed"
-
-
-@app.route('/teste')
-def teste():
-    data = requests.get(
-        'https://meepserver.azurewebsites.net/api/Donate/Payments/F3289933-DB0A-45D7-A23A-E584191B2915')
-    data = data.json()
-    df = pd.read_json(
-        'https://meepserver.azurewebsites.net/api/Donate/Payments/F3289933-DB0A-45D7-A23A-E584191B2915')
-    print(df.head())
-
-    return jsonify(data['quantities'])
 
 
 @app.route("/")
