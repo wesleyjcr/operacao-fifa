@@ -1,11 +1,8 @@
 import telegram
 
 from flask import Flask
-from sqlalchemy import create_engine
+
 from blueprints import bpbot
-
-
-engine = create_engine('sqlite:///storage.db', echo=False)
 
 
 def create_app():

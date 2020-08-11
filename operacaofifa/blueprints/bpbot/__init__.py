@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 import locale
 from datetime import datetime
+from sqlalchemy import create_engine
 from credentials import bot_token, bot_user_name, URL
 from flask import Blueprint, jsonify
 
