@@ -5,7 +5,7 @@ import locale
 from datetime import datetime
 from sqlalchemy import create_engine
 from credentials import bot_token, bot_user_name, URL
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 
 global bot
 global TOKEN
