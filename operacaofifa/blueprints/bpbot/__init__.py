@@ -70,17 +70,17 @@ def respond():
         update_data()
 
     if text == "/start":
-                message = 'Olá seja bem vindo ao Bot da Operação FIFA\n\n'\
-                    'Este bot é uma iniciativa de torcedores e possui vínculo '\
-                    'com a Meep e nem com o Cruzeiro.\n'\
-                    'Uma solução de torcedores para torcedores em nome da transparência!\n\n'\
-                    '🦊 NÓS SOMOS CRUZEIRO 🦊\n\n'\
-                    'Você pode interagir com o bot com os seguintes comandos:\n'\
-                    '/start - Iniciar o bot\n'\
-                    '/status - Veja um panorama geral das doações\n'\
-                    '/resumo_semanal - Um resumo das doações da última semana\n'\
-                    '/ultima_atualizacao - Verifique a última vez que a base de dados foi atualizada\n\n'\
-                    'Faça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa'
+        message = 'Olá seja bem vindo ao Bot da Operação FIFA\n\n'\
+            'Este bot é uma iniciativa de torcedores e possui vínculo '\
+            'com a Meep e nem com o Cruzeiro.\n'\
+            'Uma solução de torcedores para torcedores em nome da transparência!\n\n'\
+            '🦊 NÓS SOMOS CRUZEIRO 🦊\n\n'\
+            'Você pode interagir com o bot com os seguintes comandos:\n'\
+            '/start - Iniciar o bot\n'\
+            '/status - Veja um panorama geral das doações\n'\
+            '/resumo_semanal - Um resumo das doações da última semana\n'\
+            '/ultima_atualizacao - Verifique a última vez que a base de dados foi atualizada\n\n'\
+            'Faça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa'
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
@@ -140,7 +140,6 @@ def respond():
             '\n\nFaça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa'
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
-
 
     return "ok"
 
