@@ -3,7 +3,6 @@ import pandas as pd
 import requests
 import locale
 from datetime import datetime
-from app import engine
 from credentials import bot_token, bot_user_name, URL
 from flask import Blueprint, jsonify
 
@@ -12,6 +11,8 @@ global TOKEN
 
 TOKEN = bot_token
 bot = telegram.Bot(token=TOKEN)
+
+engine = create_engine('sqlite:///storage.db', echo=False)
 
 bp = Blueprint('bpbot', __name__)
 
