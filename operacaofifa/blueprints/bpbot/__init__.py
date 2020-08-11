@@ -70,10 +70,18 @@ def respond():
         update_data()
 
     if text == "/start":
-        bot_welcome = """
-        Seja bem vindo ao bot da operação fifa, saiba tudo sobre as doações.
-        """
-        bot.sendMessage(chat_id=chat_id, text=bot_welcome,
+                message = 'Olá seja bem vindo ao Bot da Operação FIFA\n\n'\
+                    'Este bot é uma iniciativa de torcedores e possui vínculo '\
+                    'com a Meep e nem com o Cruzeiro.\n'\
+                    'Uma solução de torcedores para torcedores em nome da transparência!\n\n'\
+                    '🦊 NÓS SOMOS CRUZEIRO 🦊\n\n'\
+                    'Você pode interagir com o bot com os seguintes comandos:\n'\
+                    '/start - Iniciar o bot\n'\
+                    '/status - Veja um panorama geral das doações\n'\
+                    '/resumo_semanal - Um resumo das doações da última semana\n'\
+                    '/ultima_atualizacao - Verifique a última vez que a base de dados foi atualizada\n\n'\
+                    'Faça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa'
+        bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/status":
@@ -91,9 +99,7 @@ def respond():
         message = '😀 Veja aqui os dados solicitados:\n\n'\
             f'💰 R$ {amount_format} Foram doados até o momento.\n'\
             f'🦊 Ao todo foram {quantity} doações.\n\n'\
-            'Este bot não tem ligação direta com a Meep, ou o Cruzeiro.\n'\
-            'É feito de Cruzeirenses para Cruzeirenses, doe e ajude o Cruzeiro.\n\n'\
-            'Saiba mais em: https://www.meepdonate.com/live/operacaofifa'
+            'Faça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa'
 
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
@@ -107,18 +113,17 @@ def respond():
 
         time_delta = datetime.now()-last_update
         minutes_last_update = int(time_delta.total_seconds()/60)
-        message = f'''
-        A nossa base de dados foi atulizada pela úlima vez há {minutes_last_update} minutos atrás.
-        '''
+        message = 'A nossa base de dados foi atulizada pela úlima vez há'\
+            f'⏱ {minutes_last_update} minutos atrás.'
+
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/resumo_semanal":
         with engine.connect() as connection:
-            message = '''
-Este é um resumo das doações dos últimos sete dias:\n
-Data                 Valor
-'''
+            message = 'Este é um resumo das doações dos últimos sete dias:\n'\
+                      'Data                 Valor\n'
+
             sum_amount = 0
             locale.setlocale(locale.LC_MONETARY, 'en_US.UTF-8')
             result = connection.execute(
@@ -130,20 +135,12 @@ Data                 Valor
                 date_format = row[0][8:10]+'/'+row[0][5:7]+'/'+row[0][0:4]
                 message += f'{date_format}         R$ {locale.currency(float(row[1]), grouping=True, symbol=None)}\n'
                 sum_amount += float(row[1])
-        message += f'\nO total de doações dos últimos 7 dias foi de R$ {locale.currency(sum_amount, grouping=True, symbol=None)}'
+        message += '\nO total de doações dos últimos 7 dias foi de'\
+            f'R$ {locale.currency(sum_amount, grouping=True, symbol=None)}'\
+            '\n\nFaça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa'
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
-    else:
-        message = '''
-Você pode interagir com o bot com os seguintes comandos:
-
-/start - Iniciar o bot
-/status - Veja um panorama geral das doações
-/ultima_atualizacao - Verifique a última vez que a base de dados foi atualizada
-        '''
-        bot.sendMessage(chat_id=chat_id, text=message,
-                        reply_to_message_id=msg_id)
 
     return "ok"
 
