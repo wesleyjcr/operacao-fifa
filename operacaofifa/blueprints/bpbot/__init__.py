@@ -71,7 +71,7 @@ def respond():
 
     if text == "/start":
         message = 'Olá seja bem vindo ao Bot da Operação FIFA\n\n'\
-            'Este bot é uma iniciativa de torcedores e possui vínculo '\
+            'Este bot é uma iniciativa de torcedores e não possui vínculo '\
             'com a Meep e nem com o Cruzeiro.\n'\
             'Uma solução de torcedores para torcedores em nome da transparência!\n\n'\
             '🦊 NÓS SOMOS CRUZEIRO 🦊\n\n'\
