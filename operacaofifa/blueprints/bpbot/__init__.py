@@ -88,9 +88,9 @@ def respond():
         amount_format = locale.currency(
             float(amount), grouping=True, symbol=None)
 
-        message = f'😀 Veja aqui os dados solicitados:\n'\
-            '💵 **R$ {amount_format}** Foram doados até o momento.\n'\
-            '📉 Ao todo foram {quantity} doações.\n'\
+        message = '😀 Veja aqui os dados solicitados:\n'\
+            f'💰 R$ {amount_format} Foram doados até o momento.\n'\
+            f'🦊 Ao todo foram {quantity} doações.\n'\
             'Este bot não tem ligação direta com a Meep, ou o Cruzeiro.\n'\
             'É feito de Cruzeirenses para Cruzeirenses, doe e ajude o Cruzeiro.\n'\
             'Saiba mais em: https://www.meepdonate.com/live/operacaofifa'
