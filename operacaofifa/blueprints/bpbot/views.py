@@ -2,7 +2,14 @@ from flask import jsonify, request
 import telegram
 from operacaofifa.ext.database import db
 from operacaofifa.ext.telegram_bot import bot, TOKEN, URL
-from operacaofifa.blueprints.bpbot.controllers import need_to_update, update_data, view_start, view_resume, view_last_update, view_resume_week
+from operacaofifa.blueprints.bpbot.controllers import (
+    need_to_update,
+    update_data,
+    view_start,
+    view_resume,
+    view_last_update,
+    view_resume_week,
+)
 from datetime import datetime
 
 
@@ -13,6 +20,7 @@ def respond():
     msg_id = update.message.message_id
 
     text = update.message.text.encode("utf-8").decode()
+    print(update)
 
     if need_to_update():
         update_data()
@@ -53,9 +61,12 @@ def index():
 
 
 def test():
+    if need_to_update():
+        update_data()
     with db.engine.connect() as connection:
         result = connection.execute(
-            'select sum(amount) amount, sum(quantity) quantity from donations')
+            "select sum(amount) amount, sum(quantity) quantity from donations"
+        )
         for row in result:
             amount = row[0]
             quantity = row[1]
