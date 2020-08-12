@@ -121,7 +121,7 @@ def respond():
     elif text == "/resumo_semanal":
         with engine.connect() as connection:
             message = 'Este é um resumo das doações dos últimos sete dias:\n'\
-                      'Data                 Valor\n'
+                      'Data                    Valor\n'
 
             sum_amount = 0
             locale.setlocale(locale.LC_MONETARY, 'en_US.UTF-8')
