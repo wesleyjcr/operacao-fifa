@@ -7,6 +7,12 @@ from flask import jsonify, request
 from operacaofifa.ext.database import db
 from operacaofifa.credentials import bot_token, bot_user_name, URL
 
+global bot
+global TOKEN
+
+TOKEN = bot_token
+bot = telegram.Bot(token=TOKEN)
+
 
 def update_data():
     req = requests.get(
