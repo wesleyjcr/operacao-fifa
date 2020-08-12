@@ -76,9 +76,9 @@ def respond():
             'Uma solução de torcedores para torcedores em nome da transparência!\n\n'\
             '🦊 NÓS SOMOS CRUZEIRO 🦊\n\n'\
             'Você pode interagir com o bot com os seguintes comandos:\n'\
-            '/start - Iniciar o bot\n'\
-            '/status - Veja um panorama geral das doações\n'\
-            '/resumo_semanal - Um resumo das doações da última semana\n'\
+            '/start - Iniciar o bot\n\n'\
+            '/resumo - Veja um panorama geral das doações\n'\
+            '/resumo_semanal - Um resumo das doações da última semana\n\n'\
             '/ultima_atualizacao - Verifique a última vez que a base de dados foi atualizada\n\n'\
             'Faça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa'
         bot.sendMessage(chat_id=chat_id, text=message,
