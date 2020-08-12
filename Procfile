@@ -1,1 +1,1 @@
-web: gunicorn "operacaofifa:create_app()"
+web: gunicorn "operacaofifa.app:create_app()"
