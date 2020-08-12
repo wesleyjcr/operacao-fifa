@@ -132,7 +132,9 @@ def register_log(username, first_name, text, is_bot):
             "SELECT name FROM sqlite_master WHERE type='table' AND name='logs'"
         )
         for row in result:
-            if row[0] != None:
+            print(row[0])
+            if row[0] == '':
+
                 with db.engine.connect() as connection:
                     connection.execute(
                         '''CREATE TABLE "logs" (
@@ -141,7 +143,7 @@ def register_log(username, first_name, text, is_bot):
                        "username" text,
                        "first_name" text,
                        "text" text,
-                       "is_bot" Boolean
+                       "is_bot" text
                     '''
                     )
 
