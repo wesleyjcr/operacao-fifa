@@ -84,7 +84,7 @@ def respond():
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
-    elif text == "/status":
+    elif text == "/resumo":
         with engine.connect() as connection:
             result = connection.execute(
                 'select sum(amount) amount, sum(quantity) quantity from donations')
@@ -113,7 +113,7 @@ def respond():
 
         time_delta = datetime.now()-last_update
         minutes_last_update = int(time_delta.total_seconds()/60)
-        message = 'A nossa base de dados foi atulizada pela úlima vez há'\
+        message = 'A nossa base de dados foi atulizada pela úlima vez há '\
             f'⏱ {minutes_last_update} minutos atrás.'
 
         bot.sendMessage(chat_id=chat_id, text=message,
