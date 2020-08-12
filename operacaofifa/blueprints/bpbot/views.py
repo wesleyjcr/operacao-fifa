@@ -75,10 +75,9 @@ def test():
         update_data()
     with db.engine.connect() as connection:
         result = connection.execute(
-            "select sum(amount) amount, sum(quantity) quantity from donations"
+            "select * from logs"
         )
         for row in result:
-            amount = row[0]
-            quantity = row[1]
+            teste = row[0]
 
-    return jsonify({"amount": amount, "quantity": quantity})
+    return teste
