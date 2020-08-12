@@ -22,7 +22,7 @@ def respond():
 
     text = update.message.text.encode("utf-8").decode()
 
-    from_message = update.message['from']
+    from_message = update.message
     print(from_message)
 
     if need_to_update():
