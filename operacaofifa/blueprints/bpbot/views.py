@@ -9,6 +9,7 @@ from operacaofifa.blueprints.bpbot.controllers import (
     view_resume,
     view_last_update,
     view_resume_week,
+    register_log,
 )
 from datetime import datetime
 
@@ -20,27 +21,36 @@ def respond():
     msg_id = update.message.message_id
 
     text = update.message.text.encode("utf-8").decode()
-    print(update)
+
+    from_message = update.message['from']
 
     if need_to_update():
         update_data()
 
     if text == "/start":
+        register_log(from_message.username, from_message.first_name,
+                     update.message.text, from_message.is_bot)
         message = view_start()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/resumo":
+        register_log(from_message.username, from_message.first_name,
+                     update.message.text, from_message.is_bot)
         message = view_resume()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/ultima_atualizacao":
+        register_log(from_message.username, from_message.first_name,
+                     update.message.text, from_message.is_bot)
         message = view_last_update()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/resumo_semanal":
+        register_log(from_message.username, from_message.first_name,
+                     update.message.text, from_message.is_bot)
         message = view_resume_week()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
