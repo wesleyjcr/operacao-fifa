@@ -21,10 +21,10 @@ def respond():
     msg_id = update.message.message_id
 
     text = update.message.text.encode("utf-8").decode()
-    username = update.message.username
-    first_name = update.message.first_name
+    username = 'update.message.username'
+    first_name = 'update.message.first_name'
 
-    print(update.message)
+    print(update)
 
     if need_to_update():
         update_data()
