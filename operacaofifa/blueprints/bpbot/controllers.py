@@ -128,6 +128,24 @@ def view_last_update():
 
 def register_log(username, first_name, text, is_bot):
     with db.engine.connect() as connection:
+        result = connection.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='logs'"
+        )
+        for row in result:
+            if row[0] != None:
+                with db.engine.connect() as connection:
+                    connection.execute(
+                        '''CREATE TABLE "logs" (
+                       "id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                       "date_time"	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                       "username" text,
+                       "first_name" text,
+                       "text" text,
+                       "is_bot" Boolean
+                    '''
+                    )
+
+    with db.engine.connect() as connection:
         connection.execute(
             f'''INSERT INTO logs (username, first_name, text, is_bot)
             values ('{username}','{first_name}','{text}',{is_bot})'''
