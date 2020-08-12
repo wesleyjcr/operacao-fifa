@@ -24,7 +24,7 @@ def respond():
     username = update.message.username
     first_name = update.message.first_name
 
-    print(udpate.message)
+    print(update.message)
 
     if need_to_update():
         update_data()
