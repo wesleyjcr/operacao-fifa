@@ -1,14 +1,8 @@
-import telegram
-from sqlalchemy import create_engine
+from flask import Blueprint
 from operacaofifa.credentials import bot_token, bot_user_name, URL
 from operacaofifa.blueprints.bpbot.actions import index, set_webhook, respond, test
-from flask import Blueprint
+from operacaofifa.ext.telegram_bot import TOKEN
 
-global bot
-global TOKEN
-
-TOKEN = bot_token
-bot = telegram.Bot(token=TOKEN)
 
 bp = Blueprint('bpbot', __name__)
 

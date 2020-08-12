@@ -1,4 +1,3 @@
-import telegram
 from flask import Flask
 from operacaofifa.ext import database
 from operacaofifa.blueprints import bpbot
@@ -13,7 +12,3 @@ def create_app():
     bpbot.init_app(app)
 
     return app
-
-
-# if __name__ == "__main__":
-#    app.run(host="0.0.0.0", port=5000, threaded=True)

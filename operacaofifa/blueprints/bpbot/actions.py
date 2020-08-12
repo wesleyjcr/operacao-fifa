@@ -1,17 +1,10 @@
-import telegram
+from flask import jsonify, request
 import pandas as pd
 import requests
 import locale
 from datetime import datetime
-from flask import jsonify, request
 from operacaofifa.ext.database import db
-from operacaofifa.credentials import bot_token, bot_user_name, URL
-
-global bot
-global TOKEN
-
-TOKEN = bot_token
-bot = telegram.Bot(token=TOKEN)
+from operacaofifa.ext.telegram_bot import bot, TOKEN, URL
 
 
 def update_data():
