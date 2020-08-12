@@ -96,8 +96,7 @@ def respond():
         amount_format = locale.currency(
             float(amount), grouping=True, symbol=None)
 
-        message = '😀 Veja aqui os dados solicitados:\n\n'\
-            f'💰 R$ {amount_format} Foram doados até o momento.\n'\
+        message = f'💰 R$ {amount_format} foram doados até o momento.\n'\
             f'🦊 Ao todo foram {quantity} doações.\n\n'\
             'Faça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa'
 
