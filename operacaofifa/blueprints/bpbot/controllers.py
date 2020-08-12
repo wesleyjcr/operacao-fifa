@@ -1,6 +1,6 @@
 import pandas as pd
 import requests
-
+from operacaofifa.ext.database import db
 from datetime import datetime
 
 
