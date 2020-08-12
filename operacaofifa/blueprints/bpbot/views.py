@@ -21,38 +21,38 @@ def respond():
     msg_id = update.message.message_id
 
     text = update.message.text.encode("utf-8").decode()
-    username = 'update.message.username'
-    first_name = 'update.message.first_name'
+    username = update.message.chat.username
+    first_name = update.message.chat.first_name
 
-    print(update)
+    print(update['message']['from']['is_bot'])
 
     if need_to_update():
         update_data()
 
     if text == "/start":
         register_log(username, first_name,
-                     update.message.text, False)
+                     text, False)
         message = view_start()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/resumo":
         register_log(username, first_name,
-                     update.message.text, False)
+                     text, False)
         message = view_resume()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/ultima_atualizacao":
         register_log(username, first_name,
-                     update.message.text, False)
+                     text, False)
         message = view_last_update()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/resumo_semanal":
         register_log(username, first_name,
-                     update.message.text, False)
+                     text, False)
         message = view_resume_week()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
