@@ -129,6 +129,6 @@ def view_last_update():
 def register_log(username, first_name, text, is_bot):
     with db.engine.connect() as connection:
         connection.execute(
-            '''INSERT INTO logs (username, first_name, text, is_bot)
-            values (:username,:first_name,:text,:is_bot)'''
+            f'''INSERT INTO logs (username, first_name, text, is_bot)
+            values ('{username}','{first_name}','{text}',{is_bot})'''
         )
