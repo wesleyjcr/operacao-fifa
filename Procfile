@@ -1,1 +1,1 @@
-web: gunicorn --chdir operacaofifa app:create_app
+web: gunicorn --chdir operacaofifa app:create_app()
