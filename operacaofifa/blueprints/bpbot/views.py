@@ -4,6 +4,7 @@ import locale
 from operacaofifa.ext.database import db
 from operacaofifa.ext.telegram_bot import bot, TOKEN, URL
 from operacaofifa.blueprints.bpbot.controllers import need_to_update, update_data
+from datetime import datetime
 
 
 def respond():
