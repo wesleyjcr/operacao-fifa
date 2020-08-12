@@ -1,4 +1,5 @@
 from flask import jsonify, request
+import telegram
 import pandas as pd
 import requests
 import locale
