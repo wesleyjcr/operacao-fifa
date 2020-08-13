@@ -143,7 +143,7 @@ def register_log(username, first_name, text, is_bot):
                 "username" text,
                 "first_name" text,
                 "text" text,
-                "is_bot" text
+                "is_bot" text);
             '''
             )
 
