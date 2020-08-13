@@ -132,7 +132,7 @@ def register_log(username, first_name, text, is_bot):
             "SELECT name FROM sqlite_master WHERE type='table' AND name='logs'"
         )
         for row in result:
-            print(row[0])
+            print('Dado', row[0])
             if row[0] == '':
 
                 with db.engine.connect() as connection:
@@ -147,8 +147,8 @@ def register_log(username, first_name, text, is_bot):
                     '''
                     )
 
-    with db.engine.connect() as connection:
-        connection.execute(
-            f'''INSERT INTO logs (username, first_name, text, is_bot)
-            values ('{username}','{first_name}','{text}',{is_bot})'''
-        )
+    # with db.engine.connect() as connection:
+    #    connection.execute(
+    #        f'''INSERT INTO logs (username, first_name, text, is_bot)
+    #        values ('{username}','{first_name}','{text}',{is_bot})'''
+    #    )
