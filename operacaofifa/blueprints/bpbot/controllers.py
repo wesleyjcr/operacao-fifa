@@ -133,8 +133,8 @@ def register_log(username, first_name, text, is_bot):
         )
         for row in result:
             logs = row[0]
-    print(type(logs), '*'*30)
-    if int(logs) == 0:
+
+    if logs == 0:
         with db.engine.connect() as connection:
             connection.execute(
                 '''CREATE TABLE "logs" (
@@ -150,5 +150,5 @@ def register_log(username, first_name, text, is_bot):
     with db.engine.connect() as connection:
         connection.execute(
             f'''INSERT INTO logs (username, first_name, text, is_bot)
-            values ('{username}','{first_name}','{text}',{is_bot})'''
+            values ('{username}','{first_name}','{text}','{is_bot}')'''
         )
