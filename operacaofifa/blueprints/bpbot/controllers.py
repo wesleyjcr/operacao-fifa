@@ -131,9 +131,9 @@ def register_log(username, first_name, text, is_bot):
         result = connection.execute(
             "SELECT count(1) FROM sqlite_master WHERE type='table' AND name='logs'"
         )
-        for row in restult:
+        for row in result:
             logs = row[0]
-
+    print(type(logs), '*'*30)
     if int(logs) == 0:
         with db.engine.connect() as connection:
             connection.execute(
