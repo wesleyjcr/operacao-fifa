@@ -73,11 +73,14 @@ def index():
 def test():
     if need_to_update():
         update_data()
+
+    logs = []
+
     with db.engine.connect() as connection:
         result = connection.execute(
             "select * from logs"
         )
         for row in result:
-            teste = row[0]
+            logs.append(row[0])
 
-    return teste
+    return jsonify(logs)
