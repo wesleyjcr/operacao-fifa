@@ -129,9 +129,12 @@ def view_last_update():
 def register_log(username, first_name, text, is_bot):
     with db.engine.connect() as connection:
         result = connection.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='logs'"
+            "SELECT count(1) FROM sqlite_master WHERE type='table' AND name='logs'"
         )
-    if not result:
+        for row in restult:
+            logs = row[0]
+
+    if int(logs) == 0:
         with db.engine.connect() as connection:
             connection.execute(
                 '''CREATE TABLE "logs" (
