@@ -144,8 +144,8 @@ def register_log(username, first_name, text, is_bot):
             '''
             )
 
-    # with db.engine.connect() as connection:
-    #    connection.execute(
-    #        f'''INSERT INTO logs (username, first_name, text, is_bot)
-    #        values ('{username}','{first_name}','{text}',{is_bot})'''
-    #    )
+    with db.engine.connect() as connection:
+        connection.execute(
+            f'''INSERT INTO logs (username, first_name, text, is_bot)
+            values ('{username}','{first_name}','{text}',{is_bot})'''
+        )
