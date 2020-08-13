@@ -131,21 +131,18 @@ def register_log(username, first_name, text, is_bot):
         result = connection.execute(
             "SELECT name FROM sqlite_master WHERE type='table' AND name='logs'"
         )
-        for row in result:
-            print('Dado', row[0])
-            if row[0] == '':
-
-                with db.engine.connect() as connection:
-                    connection.execute(
-                        '''CREATE TABLE "logs" (
-                       "id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                       "date_time"	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                       "username" text,
-                       "first_name" text,
-                       "text" text,
-                       "is_bot" text
-                    '''
-                    )
+    if not result:
+        with db.engine.connect() as connection:
+            connection.execute(
+                '''CREATE TABLE "logs" (
+                "id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                "date_time"	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                "username" text,
+                "first_name" text,
+                "text" text,
+                "is_bot" text
+            '''
+            )
 
     # with db.engine.connect() as connection:
     #    connection.execute(
