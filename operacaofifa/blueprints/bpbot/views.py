@@ -81,6 +81,13 @@ def test():
             "select * from logs"
         )
         for row in result:
-            logs.append(row[0])
+            logs.append({
+                "id": row[0],
+                "date_time": row[1],
+                "username": row[2],
+                "first_name": row[3],
+                "text": row[4],
+                "is_bot": row[5]
+            })
 
     return jsonify(logs)
