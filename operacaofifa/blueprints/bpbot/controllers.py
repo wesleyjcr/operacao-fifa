@@ -101,7 +101,7 @@ def view_resume_week():
             sum_amount += float(row[1])
 
     message += (
-        "\nO total de doações dos últimos 7 dias foi de"
+        "\nO total de doações dos últimos 7 dias foi de "
         f"R$ {locale.currency(sum_amount, grouping=True, symbol=None)}"
         "\n\nFaça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa"
     )
@@ -120,7 +120,7 @@ def view_last_update():
     time_delta = datetime.now() - last_update
     minutes_last_update = int(time_delta.total_seconds() / 60)
     message = (
-        "A nossa base de dados foi atulizada pela úlima vez há "
+        "A nossa base de dados foi atulizada pela última vez há "
         f"⏱ {minutes_last_update} minutos atrás."
     )
     return message
