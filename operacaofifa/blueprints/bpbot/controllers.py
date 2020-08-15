@@ -6,14 +6,13 @@ from datetime import datetime
 
 
 def format_currency(valor):
-    return 'R$ ' + ('{:,.2f}'.format(valor)
-                    .replace(',', ' ')
-                    .replace('.', ',')
-                    .replace(' ', '.'))
+    return "R$ " + (
+        "{:,.2f}".format(valor).replace(",", " ").replace(".", ",").replace(" ", ".")
+    )
 
 
 def format_number(valor):
-    return f'{valor:,}'.replace(',', '.')
+    return f"{valor:,}".replace(",", ".")
 
 
 def update_data():
@@ -28,8 +27,7 @@ def update_data():
     donations = pd.DataFrame(data["donations"])
     quantities = pd.DataFrame(data["quantities"])
 
-    date_request.to_sql("date_last_request",
-                        con=db.engine, if_exists="replace")
+    date_request.to_sql("date_last_request", con=db.engine, if_exists="replace")
     donations.to_sql("donations", con=db.engine, if_exists="replace")
     quantities.to_sql("quantities", con=db.engine, if_exists="replace")
 
@@ -123,8 +121,7 @@ def view_week_summary():
 def view_month_summary():
     with db.engine.connect() as connection:
         message = (
-            "Este é um resumo das doações por mês:\n"
-            "Data                   Valor\n"
+            "Este é um resumo das doações por mês:\n" "Data                   Valor\n"
         )
 
         sum_amount = 0
@@ -165,9 +162,14 @@ def view_last_update():
 
 
 def register_log(username, first_name, text, is_bot):
-    mongo.db.logs.insert_one({
-        "username": username,
-        "first_name": first_name,
-        "text": text,
-        "is_bot": is_bot
-    })
+    mongo.db.logs.insert_one(
+        {
+            "username": username,
+            "first_name": first_name,
+            "text": text,
+            "is_bot": is_bot,
+            "datetime": requests.get(
+                "http://worldtimeapi.org/api/timezone/America/Sao_Paulo"
+            ).json()["datetime"],
+        }
+    )
