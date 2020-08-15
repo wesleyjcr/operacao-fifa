@@ -5,3 +5,5 @@ gunicorn
 pandas
 flask-sqlalchemy
 python-dotenv
+flask-pymongo
+dnspython

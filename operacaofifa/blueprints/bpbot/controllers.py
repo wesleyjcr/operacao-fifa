@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 from operacaofifa.ext.database import db
+from operacaofifa.ext.database_mongo import mongo
 from datetime import datetime
 
 
@@ -164,28 +165,9 @@ def view_last_update():
 
 
 def register_log(username, first_name, text, is_bot):
-    with db.engine.connect() as connection:
-        result = connection.execute(
-            "SELECT count(1) FROM sqlite_master WHERE type='table' AND name='logs'"
-        )
-        for row in result:
-            logs = row[0]
-
-    if logs == 0:
-        with db.engine.connect() as connection:
-            connection.execute(
-                '''CREATE TABLE "logs" (
-                "id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                "date_time"	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                "username" text,
-                "first_name" text,
-                "text" text,
-                "is_bot" text);
-            '''
-            )
-
-    with db.engine.connect() as connection:
-        connection.execute(
-            f'''INSERT INTO logs (username, first_name, text, is_bot)
-            values ('{username}','{first_name}','{text}','{is_bot}')'''
-        )
+    mongo.db.logs.insert_one({
+        "username": username,
+        "first_name": first_name,
+        "text": text,
+        "is_bot": is_bot
+    })

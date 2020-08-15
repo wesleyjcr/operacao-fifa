@@ -98,7 +98,3 @@ def test():
             })
 
     return jsonify(logs)
-
-
-def test_data():
-    return view_month_summary()
