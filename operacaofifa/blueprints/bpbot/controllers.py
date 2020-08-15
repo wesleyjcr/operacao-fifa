@@ -123,7 +123,7 @@ def view_month_summary():
     with db.engine.connect() as connection:
         message = (
             "Este é um resumo das doações por mês:\n"
-            "Data                    Valor\n"
+            "Data                   Valor\n"
         )
 
         sum_amount = 0
