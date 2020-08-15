@@ -26,53 +26,51 @@ def respond():
     username = update.message.chat.username
     first_name = update.message.chat.first_name
 
-    is_bot = update.message.from_user
-
-    print(type(is_bot), is_bot)
+    is_bot = update.message.from_user.is_bot
 
     if need_to_update():
         update_data()
 
     if text == "/start":
         register_log(username, first_name,
-                     text, False)
+                     text, is_bot)
         message = view_start()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/resumo":
         register_log(username, first_name,
-                     text, False)
+                     text, is_bot)
         message = view_resume()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/ultima_atualizacao":
         register_log(username, first_name,
-                     text, False)
+                     text, is_bot)
         message = view_last_update()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/resumo_semanal":
         register_log(username, first_name,
-                     text, False)
+                     text, is_bot)
         message = view_week_summary()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif text == "/resumo_mensal":
         register_log(username, first_name,
-                     text, False)
+                     text, is_bot)
         message = view_month_summary()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
     elif "/feedback" in text:
         register_log(username, first_name,
-                     text, False)
+                     text, is_bot)
         message = register_feedback(
-            username, first_name, text.replace('/feedback', ''), False)
+            username, first_name, text.replace('/feedback', ''), is_bot)
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
