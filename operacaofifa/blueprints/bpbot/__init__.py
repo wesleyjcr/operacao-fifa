@@ -15,8 +15,7 @@ routes = [
     ("/", "index", index, ["GET"]),
     ("/setwebhook", "setwebhook", set_webhook, ["GET", "POST"]),
     (f"/{TOKEN}", "respond", respond, ["POST"]),
-    ("/test", "test", test, ['GET']),
-    ("/test_data", "test_data", test_data, ['GET'])
+    ("/test", "test", test, ['GET'])
 ]
 
 for route, endpoint, view_func, methods in routes:
