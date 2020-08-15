@@ -26,7 +26,7 @@ def respond():
     username = update.message.chat.username
     first_name = update.message.chat.first_name
 
-    is_bot = update.message
+    is_bot = jsonify(update.message)
 
     print(type(is_bot), is_bot)
 
