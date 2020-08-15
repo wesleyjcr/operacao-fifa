@@ -68,8 +68,10 @@ def respond():
     elif "/feedback" in text:
         text_clean = text.replace('/feedback', '')
         if text_clean == '' or text_clean == ' ':
-            message = 'Para utilizar este recurso digite /feedback e uma mensagem \n'\
-                      'Por exemplo: \n\n/feedback Gostei do bot dou nota 6 fique feliz é melhor que 1!'
+            message = 'Ops, seu feedback veio vazio!\n\n'\
+                      'Para utilizar este recurso faça o seguinte digite /feedback e uma mensagem \n'\
+                      'Por exemplo: \n\n/feedback Gostei do bot dou nota 6 fique feliz é melhor que 1!\n\n'\
+                      '🦊 NÓS SOMOS CRUZEIRO 🦊'
             bot.sendMessage(chat_id=chat_id, text=message,
                             reply_to_message_id=msg_id)
         else:
