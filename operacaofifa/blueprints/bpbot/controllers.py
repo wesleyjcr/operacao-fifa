@@ -7,7 +7,8 @@ from datetime import datetime
 
 def format_currency(valor):
     return "R$ " + (
-        "{:,.2f}".format(valor).replace(",", " ").replace(".", ",").replace(" ", ".")
+        "{:,.2f}".format(valor).replace(
+            ",", " ").replace(".", ",").replace(" ", ".")
     )
 
 
@@ -27,7 +28,8 @@ def update_data():
     donations = pd.DataFrame(data["donations"])
     quantities = pd.DataFrame(data["quantities"])
 
-    date_request.to_sql("date_last_request", con=db.engine, if_exists="replace")
+    date_request.to_sql("date_last_request",
+                        con=db.engine, if_exists="replace")
     donations.to_sql("donations", con=db.engine, if_exists="replace")
     quantities.to_sql("quantities", con=db.engine, if_exists="replace")
 
@@ -167,6 +169,20 @@ def register_log(username, first_name, text, is_bot):
             "username": username,
             "first_name": first_name,
             "text": text,
+            "is_bot": is_bot,
+            "datetime": requests.get(
+                "http://worldtimeapi.org/api/timezone/America/Sao_Paulo"
+            ).json()["datetime"],
+        }
+    )
+
+
+def register_feedback(username, first_name, message, is_bot):
+    mongo.db.feedback.insert_one(
+        {
+            "username": username,
+            "first_name": first_name,
+            "message": message,
             "is_bot": is_bot,
             "datetime": requests.get(
                 "http://worldtimeapi.org/api/timezone/America/Sao_Paulo"

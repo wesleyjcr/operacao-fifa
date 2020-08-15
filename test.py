@@ -1,5 +1,10 @@
-import requests
+text = '/feedback gostei do aplicativo'
 
-data = requests.get(
-    'http://worldtimeapi.org/api/timezone/America/Sao_Paulo').json()['datetime']
-print(data)
+
+def validar(text):
+    if '/feedback' in text:
+        print('Sim')
+    return text
+
+
+print(validar(text))

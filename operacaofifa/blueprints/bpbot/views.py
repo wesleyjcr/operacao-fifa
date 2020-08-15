@@ -11,6 +11,7 @@ from operacaofifa.blueprints.bpbot.controllers import (
     view_week_summary,
     view_month_summary,
     register_log,
+    register_feedback
 )
 from datetime import datetime
 
@@ -24,6 +25,8 @@ def respond():
     text = update.message.text.encode("utf-8").decode()
     username = update.message.chat.username
     first_name = update.message.chat.first_name
+
+    print(update)
 
     if need_to_update():
         update_data()
@@ -62,6 +65,15 @@ def respond():
         message = view_month_summary()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
+
+    elif "/feedback" in text:
+        register_log(username, first_name,
+                     text, False)
+        message = register_feedback(
+            username, first_name, text.replace('/feedback'), False)
+        bot.sendMessage(chat_id=chat_id, text=message,
+                        reply_to_message_id=msg_id)
+
     return "ok"
 
 
