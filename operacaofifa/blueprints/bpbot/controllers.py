@@ -134,7 +134,7 @@ def view_month_summary():
         )
         for row in result:
             date_format = row[0][5:7] + "/" + row[0][0:4]
-            message += f"{date_format}         {format_currency(float(row[1]))}\n"
+            message += f"{date_format}            {format_currency(float(row[1]))}\n"
             sum_amount += float(row[1])
 
     message += (
