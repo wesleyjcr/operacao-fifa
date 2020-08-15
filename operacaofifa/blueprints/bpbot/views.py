@@ -26,9 +26,9 @@ def respond():
     username = update.message.chat.username
     first_name = update.message.chat.first_name
 
-    print(update['message']['from'])
-    print(update['message'])
-    print(type(update))
+    is_bot = update.message
+
+    print(type(is_bot), is_bot)
 
     if need_to_update():
         update_data()
