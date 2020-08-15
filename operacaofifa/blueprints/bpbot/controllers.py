@@ -67,7 +67,7 @@ def view_start():
         "/resumo_semanal - Um resumo das doações da última semana\n"
         "/resumo_mensal - Consolidado de doações por mês\n\n"
         "/ultima_atualizacao - Verifique a última vez que a base de dados foi atualizada\n\n"
-        "/feedback - Conte-me o que achou do bot. Para utilizar digite /feedback e a mensagem"
+        "/feedback - Conte-me o que achou do bot. Para utilizar digite uma mensagem "
         "na frente do comando.\n\n"
         "Faça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa"
     )
