@@ -1,8 +1,18 @@
 import pandas as pd
 import requests
-import locale
 from operacaofifa.ext.database import db
 from datetime import datetime
+
+
+def format_currency(valor):
+    return 'R$ ' + ('{:,.2f}'.format(valor)
+                    .replace(',', ' ')
+                    .replace('.', ',')
+                    .replace(' ', '.'))
+
+
+def format_number(valor):
+    return f'{valor:,}'.replace(',', '.')
 
 
 def update_data():
@@ -53,7 +63,8 @@ def view_start():
         "Você pode interagir com o bot com os seguintes comandos:\n"
         "/start - Iniciar o bot\n\n"
         "/resumo - Veja um panorama geral das doações\n"
-        "/resumo_semanal - Um resumo das doações da última semana\n\n"
+        "/resumo_semanal - Um resumo das doações da última semana\n"
+        "/resumo_mensal - Consolidado de doações por mês\n\n"
         "/ultima_atualizacao - Verifique a última vez que a base de dados foi atualizada\n\n"
         "Faça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa"
     )
@@ -69,12 +80,12 @@ def view_resume():
             amount = row[0]
             quantity = row[1]
 
-    locale.setlocale(locale.LC_MONETARY, "en_US.UTF-8")
-    amount_format = locale.currency(float(amount), grouping=True, symbol=None)
+    amount_format = format_currency(float(amount))
+    quantity_format = format_number(quantity)
 
     message = (
-        f"💰 R$ {amount_format} foram doados até o momento.\n"
-        f"🦊 Ao todo foram {quantity} doações.\n\n"
+        f"💰 {amount_format} foram doados até o momento.\n"
+        f"🦊 Ao todo foram {quantity_format} doações.\n\n"
         "Faça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa"
     )
     return message
@@ -88,7 +99,6 @@ def view_week_summary():
         )
 
         sum_amount = 0
-        locale.setlocale(locale.LC_MONETARY, "en_US.UTF-8")
         result = connection.execute(
             """select substr(date,0,11)date, sum(amount) valor_doado from quantities
                 group by date
@@ -97,12 +107,12 @@ def view_week_summary():
         )
         for row in result:
             date_format = row[0][8:10] + "/" + row[0][5:7] + "/" + row[0][0:4]
-            message += f"{date_format}         R$ {locale.currency(float(row[1]), grouping=True, symbol=None)}\n"
+            message += f"{date_format}         {format_currency(float(row[1]))}\n"
             sum_amount += float(row[1])
 
     message += (
         "\nO total de doações dos últimos 7 dias foi de "
-        f"R$ {locale.currency(sum_amount, grouping=True, symbol=None)}"
+        f"{format_currency(sum_amount)}"
         "\n\nFaça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa"
     )
 
@@ -117,7 +127,6 @@ def view_month_summary():
         )
 
         sum_amount = 0
-        locale.setlocale(locale.LC_MONETARY, "en_US.UTF-8")
         result = connection.execute(
             """select substr(date,0,8) date, sum(amount) valor_doado from quantities
                group by substr(date,0,8)
@@ -125,12 +134,12 @@ def view_month_summary():
         )
         for row in result:
             date_format = row[0][5:7] + "/" + row[0][0:4]
-            message += f"{date_format}         R$ {locale.currency(float(row[1]), grouping=True, symbol=None)}\n"
+            message += f"{date_format}         {format_currency(float(row[1]))}\n"
             sum_amount += float(row[1])
 
     message += (
         "\nO total de doações foi de "
-        f"R$ {locale.currency(sum_amount, grouping=True, symbol=None)}"
+        f"{format_currency(sum_amount)}"
         "\n\nFaça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa"
     )
 
