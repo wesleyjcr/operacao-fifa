@@ -1,6 +1,6 @@
 from flask import Blueprint
 from operacaofifa.ext.config import bot_token, bot_user_name, URL
-from operacaofifa.blueprints.bpbot.views import index, set_webhook, respond, test, test_data
+from operacaofifa.blueprints.bpbot.views import index, set_webhook, respond, test
 from operacaofifa.ext.telegram_bot import TOKEN
 
 
