@@ -189,3 +189,4 @@ def register_feedback(username, first_name, message, is_bot):
             ).json()["datetime"],
         }
     )
+    return 'Obrigado por seu feedback!🦊'
