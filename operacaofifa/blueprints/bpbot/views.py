@@ -26,7 +26,7 @@ def respond():
     username = update.message.chat.username
     first_name = update.message.chat.first_name
 
-    print(update)
+    print(update['message']['from'])
 
     if need_to_update():
         update_data()
