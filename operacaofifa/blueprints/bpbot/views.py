@@ -70,7 +70,7 @@ def respond():
         register_log(username, first_name,
                      text, False)
         message = register_feedback(
-            username, first_name, text.replace('/feedback'), False)
+            username, first_name, text.replace('/feedback', ''), False)
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
