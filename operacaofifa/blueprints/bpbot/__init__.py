@@ -1,6 +1,6 @@
 from flask import Blueprint
 from operacaofifa.ext.config import bot_token, bot_user_name, URL
-from operacaofifa.blueprints.bpbot.views import index, set_webhook, respond, test
+from operacaofifa.blueprints.bpbot.views import index, set_webhook, respond, test, test_data
 from operacaofifa.ext.telegram_bot import TOKEN
 
 
@@ -15,7 +15,8 @@ routes = [
     ("/", "index", index, ["GET"]),
     ("/setwebhook", "setwebhook", set_webhook, ["GET", "POST"]),
     (f"/{TOKEN}", "respond", respond, ["POST"]),
-    ("/test", "test", test, ['GET'])
+    ("/test", "test", test, ['GET']),
+    ("/test_data", "test_data", test_data, ['GET'])
 ]
 
 for route, endpoint, view_func, methods in routes:

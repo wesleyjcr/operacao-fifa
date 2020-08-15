@@ -80,7 +80,7 @@ def view_resume():
     return message
 
 
-def view_resume_week():
+def view_week_summary():
     with db.engine.connect() as connection:
         message = (
             "Este é um resumo das doações dos últimos sete dias:\n"
@@ -102,6 +102,34 @@ def view_resume_week():
 
     message += (
         "\nO total de doações dos últimos 7 dias foi de "
+        f"R$ {locale.currency(sum_amount, grouping=True, symbol=None)}"
+        "\n\nFaça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa"
+    )
+
+    return message
+
+
+def view_month_summary():
+    with db.engine.connect() as connection:
+        message = (
+            "Este é um resumo das doações por mês:\n"
+            "Data                    Valor\n"
+        )
+
+        sum_amount = 0
+        locale.setlocale(locale.LC_MONETARY, "en_US.UTF-8")
+        result = connection.execute(
+            """select substr(date,0,8) date, sum(amount) valor_doado from quantities
+               group by substr(date,0,8)
+            """
+        )
+        for row in result:
+            date_format = row[0][5:7] + "/" + row[0][0:4]
+            message += f"{date_format}         R$ {locale.currency(float(row[1]), grouping=True, symbol=None)}\n"
+            sum_amount += float(row[1])
+
+    message += (
+        "\nO total de doações foi de "
         f"R$ {locale.currency(sum_amount, grouping=True, symbol=None)}"
         "\n\nFaça sua doação no site oficial: https://www.meepdonate.com/live/operacaofifa"
     )

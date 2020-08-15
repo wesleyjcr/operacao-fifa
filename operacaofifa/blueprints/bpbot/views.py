@@ -8,7 +8,8 @@ from operacaofifa.blueprints.bpbot.controllers import (
     view_start,
     view_resume,
     view_last_update,
-    view_resume_week,
+    view_week_summary,
+    view_month_summary,
     register_log,
 )
 from datetime import datetime
@@ -51,10 +52,16 @@ def respond():
     elif text == "/resumo_semanal":
         register_log(username, first_name,
                      text, False)
-        message = view_resume_week()
+        message = view_week_summary()
         bot.sendMessage(chat_id=chat_id, text=message,
                         reply_to_message_id=msg_id)
 
+    elif text == "/resumo_mensal":
+        register_log(username, first_name,
+                     text, False)
+        message = view_month_summary()
+        bot.sendMessage(chat_id=chat_id, text=message,
+                        reply_to_message_id=msg_id)
     return "ok"
 
 
@@ -91,3 +98,7 @@ def test():
             })
 
     return jsonify(logs)
+
+
+def test_data():
+    return view_month_summary()
