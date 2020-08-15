@@ -27,6 +27,8 @@ def respond():
     first_name = update.message.chat.first_name
 
     print(update['message']['from'])
+    print(update['message'])
+    print(type(update))
 
     if need_to_update():
         update_data()
