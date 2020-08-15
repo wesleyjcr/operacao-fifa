@@ -25,7 +25,6 @@ def respond():
     text = update.message.text.encode("utf-8").decode()
     username = update.message.chat.username
     first_name = update.message.chat.first_name
-
     is_bot = update.message.from_user.is_bot
 
     if need_to_update():
@@ -67,12 +66,19 @@ def respond():
                         reply_to_message_id=msg_id)
 
     elif "/feedback" in text:
-        register_log(username, first_name,
-                     text, is_bot)
-        message = register_feedback(
-            username, first_name, text.replace('/feedback', ''), is_bot)
-        bot.sendMessage(chat_id=chat_id, text=message,
-                        reply_to_message_id=msg_id)
+        text_clean = text.replace('/feedback', '')
+        if text_clean == '' or text_clean == ' ':
+            message = 'Para utilizar este recurso digite /feedback e uma mensagem \n'\
+                      'Por exemplo: \n\n/feedback Gostei do bot dou nota 6 fique feliz é melhor que 1!'
+            bot.sendMessage(chat_id=chat_id, text=message,
+                            reply_to_message_id=msg_id)
+        else:
+            register_log(username, first_name,
+                         text, is_bot)
+            message = register_feedback(
+                username, first_name, text.replace('/feedback', ''), is_bot)
+            bot.sendMessage(chat_id=chat_id, text=message,
+                            reply_to_message_id=msg_id)
 
     return "ok"
 
