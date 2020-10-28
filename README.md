@@ -1,6 +1,6 @@
 # Operação FiFA
 
-![alt text](https://meepcustomblob.blob.core.windows.net/e5f687e1-e736-e227-8639-3ded2941b8b0/7da96de0-8c61-41e1-b6b5-b6d7211c4130.jpg?v=1689198275)
+![image](https://user-images.githubusercontent.com/1650083/97497961-1ffed200-194a-11eb-97c1-03db2e93bb1a.png)
 
 Este é um bot para o Telegram criado para acompanhar as doações da operação FIFA. Caso deseje testar a aplicação, basta chamar o bot pelo endereço: [Bot Operação FIFA](https://t.me/CruzeiroFIFA_bot)
 
